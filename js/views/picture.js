@@ -10,11 +10,17 @@ export default React.createClass({
     this.props.onAddClick();
   },
 
-  render() {
+  
+
+
+  render(str) {
     return (
       <div>
         <h2>Pictures</h2>
-        <button onClick={this.detailsClickHandler}>Details</button>
+        <div></div>
+        <div className="pictures-container">
+          <button onClick={this.detailsClickHandler}>Details</button>
+        </div>
         <button onClick={this.addClickHandler}>Add</button>
       </div>
     );

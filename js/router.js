@@ -7,10 +7,6 @@ import PictureComponent from './views/picture';
 import DetailsComponent from './views/detail';
 import AddComponent from './views/add';
 import EditComponent from './views/edit';
-// import {
-//   Picture as PictureComponent, Detail as DetailsComponent, 
-//   Add as AddComponent, Spinner as SpinnerComponent, Edit as EditComponent
-// } from './views';
 
 export default Backbone.Router.extend({
   routes: {
@@ -25,6 +21,7 @@ export default Backbone.Router.extend({
 
   initialize(appElement) {
     this.el = appElement;
+    this.collection = new PictureCollection();
   },
 
   goto(route) {
@@ -37,14 +34,22 @@ export default Backbone.Router.extend({
     ReactDom.render(component, this.el);
   },
 
-  showPictures() {
+  showPictures(id) {
+    let pic = this.collection.get(id);
+
+    this.collection.fetch().then(() => {
+      let x = this.collection.toJSON();
+      console.log(x);
+    }); 
+
     this.render(
-      <PictureComponent
+      <PictureComponent          
         onDetailsClick={() => this.goto('detail/:id')}
         onAddClick={() => this.goto('add')}
       />
     );
   },
+      
 
   showDetails() {
     this.render(
