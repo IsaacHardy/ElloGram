@@ -202,21 +202,19 @@ exports['default'] = _backbone2['default'].Router.extend({
   showPictures: function showPictures(id) {
     var _this = this;
 
-    var pic = this.collection.get(id);
-
     this.collection.fetch().then(function () {
-      var x = _this.collection.toJSON();
-      console.log(x);
+      _this.render(_react2['default'].createElement(_viewsPicture2['default'], {
+        onDetailsClick: function () {
+          return _this.goto('detail/:id');
+        },
+        onAddClick: function () {
+          return _this.goto('add');
+        },
+        pictures: function () {
+          return _this.collection.toJSON();
+        }
+      }));
     });
-
-    this.render(_react2['default'].createElement(_viewsPicture2['default'], {
-      onDetailsClick: function () {
-        return _this.goto('detail/:id');
-      },
-      onAddClick: function () {
-        return _this.goto('add');
-      }
-    }));
   },
 
   showDetails: function showDetails() {
@@ -432,7 +430,15 @@ exports["default"] = _react2["default"].createClass({
     this.props.onAddClick();
   },
 
-  render: function render(str) {
+  processPictures: function processPictures(data) {
+    return _react2["default"].createElement(
+      "div",
+      { key: data.objectId },
+      _react2["default"].createElement("img", { src: data.Url, className: "main-pictures" })
+    );
+  },
+
+  render: function render() {
     return _react2["default"].createElement(
       "div",
       null,
@@ -441,15 +447,10 @@ exports["default"] = _react2["default"].createClass({
         null,
         "Pictures"
       ),
-      _react2["default"].createElement("div", null),
       _react2["default"].createElement(
-        "div",
-        { className: "pictures-container" },
-        _react2["default"].createElement(
-          "button",
-          { onClick: this.detailsClickHandler },
-          "Details"
-        )
+        "button",
+        { onClick: this.detailsClickHandler },
+        this.props.pictures.map(this.processPictures)
       ),
       _react2["default"].createElement(
         "button",

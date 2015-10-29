@@ -35,19 +35,17 @@ export default Backbone.Router.extend({
   },
 
   showPictures(id) {
-    let pic = this.collection.get(id);
-
     this.collection.fetch().then(() => {
-      let x = this.collection.toJSON();
-      console.log(x);
+      this.render(
+        <PictureComponent          
+          onDetailsClick={() => this.goto('detail/:id')}
+          onAddClick={() => this.goto('add')}
+          pictures={() => this.collection.toJSON()}
+        />
+      );
     }); 
 
-    this.render(
-      <PictureComponent          
-        onDetailsClick={() => this.goto('detail/:id')}
-        onAddClick={() => this.goto('add')}
-      />
-    );
+
   },
       
 
