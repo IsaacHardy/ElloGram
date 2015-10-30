@@ -213,7 +213,7 @@ exports['default'] = _backbone2['default'].Router.extend({
         pictures: function () {
           return _this.collection.toJSON();
         }
-      }));
+      }));console.log(_this.collection);console.log(_this.render);
     });
   },
 
@@ -407,20 +407,24 @@ exports['default'] = _react2['default'].createClass({
 module.exports = exports['default'];
 
 },{"react":171}],11:[function(require,module,exports){
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-exports["default"] = _react2["default"].createClass({
-  displayName: "picture",
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+exports['default'] = _react2['default'].createClass({
+  displayName: 'picture',
 
   detailsClickHandler: function detailsClickHandler() {
     this.props.onDetailsClick();
@@ -431,39 +435,44 @@ exports["default"] = _react2["default"].createClass({
   },
 
   processPictures: function processPictures(data) {
-    return _react2["default"].createElement(
-      "div",
+    return _react2['default'].createElement(
+      'div',
       { key: data.objectId },
-      _react2["default"].createElement("img", { src: data.Url, className: "main-pictures" })
+      _react2['default'].createElement('img', { src: data.Url, className: 'main-pictures' })
     );
   },
 
   render: function render() {
-    return _react2["default"].createElement(
-      "div",
+    return _react2['default'].createElement(
+      'div',
       null,
-      _react2["default"].createElement(
-        "h2",
+      _react2['default'].createElement(
+        'h2',
         null,
-        "Pictures"
+        'Pictures'
       ),
-      _react2["default"].createElement(
-        "button",
-        { onClick: this.detailsClickHandler },
-        this.props.pictures.map(this.processPictures)
+      _react2['default'].createElement(
+        'div',
+        null,
+        this.props.pictures().map(this.processPictures)
       ),
-      _react2["default"].createElement(
-        "button",
-        { onClick: this.addClickHandler },
-        "Add"
+      _react2['default'].createElement(
+        'div',
+        null,
+        _react2['default'].createElement('button', { onClick: this.detailsClickHandler }),
+        _react2['default'].createElement(
+          'button',
+          { onClick: this.addClickHandler },
+          'Add'
+        )
       )
     );
   }
 
 });
-module.exports = exports["default"];
+module.exports = exports['default'];
 
-},{"react":171}],12:[function(require,module,exports){
+},{"react":171,"react-dom":15}],12:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.3
 

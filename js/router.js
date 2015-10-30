@@ -42,7 +42,7 @@ export default Backbone.Router.extend({
           onAddClick={() => this.goto('add')}
           pictures={() => this.collection.toJSON()}
         />
-      );
+      ); console.log(this.collection); console.log(this.render);
     }); 
 
 
