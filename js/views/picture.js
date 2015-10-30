@@ -23,9 +23,8 @@ export default React.createClass({
     return (
       <div>
         <h2>Pictures</h2> 
-        <div>{this.props.pictures().map(this.processPictures)}</div>  
         <div>     
-          <button onClick={this.detailsClickHandler}></button>
+          <button onClick={this.detailsClickHandler}>{this.props.pictures().map(this.processPictures)}</button>
           <button onClick={this.addClickHandler}>Add</button>
         </div>
       </div>

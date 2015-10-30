@@ -454,12 +454,11 @@ exports['default'] = _react2['default'].createClass({
       _react2['default'].createElement(
         'div',
         null,
-        this.props.pictures().map(this.processPictures)
-      ),
-      _react2['default'].createElement(
-        'div',
-        null,
-        _react2['default'].createElement('button', { onClick: this.detailsClickHandler }),
+        _react2['default'].createElement(
+          'button',
+          { onClick: this.detailsClickHandler },
+          this.props.pictures().map(this.processPictures)
+        ),
         _react2['default'].createElement(
           'button',
           { onClick: this.addClickHandler },
