@@ -22,6 +22,7 @@ export default Backbone.Router.extend({
   initialize(appElement) {
     this.el = appElement;
     this.collection = new PictureCollection();
+
   },
 
   goto(route) {
@@ -34,28 +35,44 @@ export default Backbone.Router.extend({
     ReactDom.render(component, this.el);
   },
 
-  showPictures(id) {
+  showPictures() {
     this.collection.fetch().then(() => {
       this.render(
         <PictureComponent          
-          onDetailsClick={() => this.goto('detail/:id')}
+          onDetailsClick={(id) => this.goto('detail/' + id)}
           onAddClick={() => this.goto('add')}
           pictures={() => this.collection.toJSON()}
         />
-      ); console.log(this.collection); console.log(this.render);
-    }); 
-
-
+      );
+    });
   },
       
 
-  showDetails() {
-    this.render(
-      <DetailsComponent
-        onBackClick={() => this.goto('picture')}
-        onEditClick={() => this.goto('edit/:id')}
-      />
-    );
+  showDetails(id) {
+    let image = this.collection.get(id);
+
+    if (image) {
+      this.render(
+        <DetailsComponent
+          onBackClick={() => this.goto('picture')}
+          onEditClick={(id) => this.goto('edit/' + id)}
+          details={image.toJSON()}
+        />
+      );
+      
+    } else {
+      image = this.collection.add({objectId: id});
+      image.fetch().then(() => {
+        this.render(
+          <DetailsComponent
+            onBackClick={() => this.goto('picture')}
+            onEditClick={(id) => this.goto('edit/' + id)}
+            details={image.toJSON()}
+          />
+        );
+      });
+    }
+
   },
 
   showAddPictures() {

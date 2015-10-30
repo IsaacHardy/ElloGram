@@ -6,16 +6,19 @@ export default React.createClass({
     this.props.onBackClick();
   },
 
-  editClickHandler() {
-    this.props.onEditClick();
+  editClickHandler(id) {
+    this.props.onEditClick(id);
   },
 
   render() {
     return (
       <div>
-        <h2>Details</h2>
+        <h2>Details</h2> 
+        <img src={this.props.details.Url}/>       
+        <button key={this.props.details.objectId} className="edit-btn" onClick={() => this.editClickHandler(data.objectId)}>
+          Edit
+        </button>
         <button onClick={this.backClickHandler}>Back</button>
-        <button onClick={this.editClickHandler}>Edit</button>
       </div>
     );
   }

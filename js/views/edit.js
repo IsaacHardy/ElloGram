@@ -10,7 +10,7 @@ export default React.createClass({
     return (
       <div>
         <h2>Edit</h2>
-        <button onClick={this.cancelClickHandler}>Back</button>
+        <button onClick={this.cancelClickHandler}>Cancel</button>
       </div>
     );
   }

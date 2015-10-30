@@ -199,13 +199,13 @@ exports['default'] = _backbone2['default'].Router.extend({
     _reactDom2['default'].render(component, this.el);
   },
 
-  showPictures: function showPictures(id) {
+  showPictures: function showPictures() {
     var _this = this;
 
     this.collection.fetch().then(function () {
       _this.render(_react2['default'].createElement(_viewsPicture2['default'], {
-        onDetailsClick: function () {
-          return _this.goto('detail/:id');
+        onDetailsClick: function (id) {
+          return _this.goto('detail/' + id);
         },
         onAddClick: function () {
           return _this.goto('add');
@@ -213,21 +213,39 @@ exports['default'] = _backbone2['default'].Router.extend({
         pictures: function () {
           return _this.collection.toJSON();
         }
-      }));console.log(_this.collection);console.log(_this.render);
+      }));
     });
   },
 
-  showDetails: function showDetails() {
+  showDetails: function showDetails(id) {
     var _this2 = this;
 
-    this.render(_react2['default'].createElement(_viewsDetail2['default'], {
-      onBackClick: function () {
-        return _this2.goto('picture');
-      },
-      onEditClick: function () {
-        return _this2.goto('edit/:id');
-      }
-    }));
+    var image = this.collection.get(id);
+
+    if (image) {
+      this.render(_react2['default'].createElement(_viewsDetail2['default'], {
+        onBackClick: function () {
+          return _this2.goto('picture');
+        },
+        onEditClick: function (id) {
+          return _this2.goto('edit/' + id);
+        },
+        details: image.toJSON()
+      }));
+    } else {
+      image = this.collection.add({ objectId: id });
+      image.fetch().then(function () {
+        _this2.render(_react2['default'].createElement(_viewsDetail2['default'], {
+          onBackClick: function () {
+            return _this2.goto('picture');
+          },
+          onEditClick: function (id) {
+            return _this2.goto('edit/' + id);
+          },
+          details: image.toJSON()
+        }));
+      });
+    }
   },
 
   showAddPictures: function showAddPictures() {
@@ -318,53 +336,58 @@ exports['default'] = _react2['default'].createClass({
 module.exports = exports['default'];
 
 },{"react":171}],9:[function(require,module,exports){
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-exports['default'] = _react2['default'].createClass({
-  displayName: 'detail',
+exports["default"] = _react2["default"].createClass({
+  displayName: "detail",
 
   backClickHandler: function backClickHandler() {
     this.props.onBackClick();
   },
 
-  editClickHandler: function editClickHandler() {
-    this.props.onEditClick();
+  editClickHandler: function editClickHandler(id) {
+    this.props.onEditClick(id);
   },
 
   render: function render() {
-    return _react2['default'].createElement(
-      'div',
+    var _this = this;
+
+    return _react2["default"].createElement(
+      "div",
       null,
-      _react2['default'].createElement(
-        'h2',
+      _react2["default"].createElement(
+        "h2",
         null,
-        'Details'
+        "Details"
       ),
-      _react2['default'].createElement(
-        'button',
+      _react2["default"].createElement("img", { src: this.props.details.Url }),
+      _react2["default"].createElement(
+        "button",
+        { key: this.props.details.objectId, className: "edit-btn", onClick: function () {
+            return _this.editClickHandler(data.objectId);
+          } },
+        "Edit"
+      ),
+      _react2["default"].createElement(
+        "button",
         { onClick: this.backClickHandler },
-        'Back'
-      ),
-      _react2['default'].createElement(
-        'button',
-        { onClick: this.editClickHandler },
-        'Edit'
+        "Back"
       )
     );
   }
 
 });
-module.exports = exports['default'];
+module.exports = exports["default"];
 
 },{"react":171}],10:[function(require,module,exports){
 'use strict';
@@ -398,7 +421,7 @@ exports['default'] = _react2['default'].createClass({
       _react2['default'].createElement(
         'button',
         { onClick: this.cancelClickHandler },
-        'Back'
+        'Cancel'
       )
     );
   }
@@ -426,8 +449,8 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 exports['default'] = _react2['default'].createClass({
   displayName: 'picture',
 
-  detailsClickHandler: function detailsClickHandler() {
-    this.props.onDetailsClick();
+  detailsClickHandler: function detailsClickHandler(id) {
+    this.props.onDetailsClick(id);
   },
 
   addClickHandler: function addClickHandler() {
@@ -435,9 +458,13 @@ exports['default'] = _react2['default'].createClass({
   },
 
   processPictures: function processPictures(data) {
+    var _this = this;
+
     return _react2['default'].createElement(
       'div',
-      { key: data.objectId },
+      { key: data.objectId, className: 'pic-container', onClick: function () {
+          return _this.detailsClickHandler(data.objectId);
+        } },
       _react2['default'].createElement('img', { src: data.Url, className: 'main-pictures' })
     );
   },
@@ -454,11 +481,7 @@ exports['default'] = _react2['default'].createClass({
       _react2['default'].createElement(
         'div',
         null,
-        _react2['default'].createElement(
-          'button',
-          { onClick: this.detailsClickHandler },
-          this.props.pictures().map(this.processPictures)
-        ),
+        this.props.pictures().map(this.processPictures),
         _react2['default'].createElement(
           'button',
           { onClick: this.addClickHandler },
