@@ -258,16 +258,6 @@ exports['default'] = _backbone2['default'].Router.extend({
     }));
   },
 
-  showEditPictures: function showEditPictures() {
-    var _this4 = this;
-
-    this.render(_react2['default'].createElement(_viewsEdit2['default'], {
-      onCancelClick: function () {
-        return _this4.goto('detail/:id');
-      }
-    }));
-  },
-
   redirectToPictures: function redirectToPictures() {
     this.navigate('picture', {
       replace: true,
@@ -277,6 +267,36 @@ exports['default'] = _backbone2['default'].Router.extend({
 
   showSpinner: function showSpinner() {
     this.render(_react2['default'].createElement(SpinnerComponent, null));
+  },
+
+  showEditPictures: function showEditPictures(id) {
+    var _this4 = this;
+
+    this.render(_react2['default'].createElement(_viewsEdit2['default'], {
+      record: function () {
+        return _this4.collection.toJSON();
+      },
+      onCancelClick: function () {
+        return _this4.goto('detail/' + id);
+      },
+      onSubmit: function (msg) {
+        return _this4.saveForm(msg);
+      }
+    }));
+  },
+
+  saveForm: function saveForm(msg) {
+    var _this5 = this;
+
+    var update = function update() {
+      return _this5.collection.toJSON();
+    };
+    console.log(update);
+    update.save({ Title: msg });
+
+    // .then(() =>
+    //   this.goto('picture')
+    // );
   },
 
   start: function start() {
@@ -374,7 +394,7 @@ exports["default"] = _react2["default"].createClass({
       _react2["default"].createElement(
         "button",
         { key: this.props.details.objectId, className: "edit-btn", onClick: function () {
-            return _this.editClickHandler(data.objectId);
+            return _this.editClickHandler(_this.props.details.objectId);
           } },
         "Edit"
       ),
@@ -390,44 +410,73 @@ exports["default"] = _react2["default"].createClass({
 module.exports = exports["default"];
 
 },{"react":171}],10:[function(require,module,exports){
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-exports['default'] = _react2['default'].createClass({
-  displayName: 'edit',
+exports["default"] = _react2["default"].createClass({
+  displayName: "edit",
+
+  getInitialState: function getInitialState() {
+    console.log(this.props.record.Title);
+    return {
+      Title: this.props.record.Title
+    };
+  },
+
+  submitHandler: function submitHandler(event) {
+    event.preventDefault();
+    this.props.onSubmit(this.state.Title);
+  },
+
+  updateMessage: function updateMessage(event) {
+    var newMessage = event.target.value;
+
+    this.setState({
+      Title: newMessage
+    });
+  },
 
   cancelClickHandler: function cancelClickHandler() {
     this.props.onCancelClick();
   },
 
   render: function render() {
-    return _react2['default'].createElement(
-      'div',
+    return _react2["default"].createElement(
+      "div",
       null,
-      _react2['default'].createElement(
-        'h2',
+      _react2["default"].createElement(
+        "h2",
         null,
-        'Edit'
+        "Edit"
       ),
-      _react2['default'].createElement(
-        'button',
+      _react2["default"].createElement(
+        "form",
+        { onSubmit: this.submitHandler },
+        _react2["default"].createElement("input", { onChange: this.updateMessage, type: "text", value: this.state.Title })
+      ),
+      _react2["default"].createElement(
+        "button",
+        { onClick: this.submitHandler },
+        "Submit"
+      ),
+      _react2["default"].createElement(
+        "button",
         { onClick: this.cancelClickHandler },
-        'Cancel'
+        "Cancel"
       )
     );
   }
-
 });
-module.exports = exports['default'];
+module.exports = exports["default"];
 
 },{"react":171}],11:[function(require,module,exports){
 'use strict';

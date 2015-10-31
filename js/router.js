@@ -12,11 +12,11 @@ export default Backbone.Router.extend({
   routes: {
 
     // Routes for Router
-    ""         : "redirectToPictures",
-    "picture" : "showPictures",
+    ""             : "redirectToPictures",
+    "picture"      : "showPictures",
     "detail/:id"   : "showDetails",
-    "add"  : "showAddPictures",
-    "edit/:id" : "showEditPictures"
+    "add"          : "showAddPictures",
+    "edit/:id"     : "showEditPictures"
   },
 
   initialize(appElement) {
@@ -83,14 +83,6 @@ export default Backbone.Router.extend({
     );
   },
 
-  showEditPictures() {
-    this.render(
-      <EditComponent
-        onCancelClick={() => this.goto('detail/:id')}
-      />
-    );
-  },
-
   redirectToPictures() {
     this.navigate('picture', {
       replace: true,
@@ -102,6 +94,27 @@ export default Backbone.Router.extend({
 
   showSpinner() {
     this.render(<SpinnerComponent/>);
+  },
+
+  showEditPictures(id) {
+    this.render(
+      <EditComponent
+        record={() => this.collection.toJSON()}
+        onCancelClick={() => this.goto('detail/' + id)}
+        onSubmit={(msg) => this.saveForm(msg)}
+      />
+    );
+  },
+
+  saveForm(msg) {
+    let update = (() => this.collection.toJSON());
+    console.log(update);
+    update.save({Title: msg});
+
+    // .then(() => 
+    //   this.goto('picture')
+    // );
+    
   },
 
   start() {
