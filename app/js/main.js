@@ -254,6 +254,17 @@ exports['default'] = _backbone2['default'].Router.extend({
     this.render(_react2['default'].createElement(_viewsAdd2['default'], {
       onCancelClick: function () {
         return _this3.goto('picture');
+      },
+      onAddClick: function () {
+        var newTitle = document.querySelector('.addTitle').value;
+        var newPictureUrl = document.querySelector('.addUrl').value;
+        var newAdd = new _resources.PictureModel({
+          Title: newTitle,
+          Url: newPictureUrl
+        });
+
+        newAdd.save();
+        _this3.goto('picture');
       }
     }));
   },
@@ -286,17 +297,11 @@ exports['default'] = _backbone2['default'].Router.extend({
   },
 
   saveForm: function saveForm(msg) {
-    var _this5 = this;
-
-    var update = function update() {
-      return _this5.collection.toJSON();
-    };
-    console.log(update);
-    update.save({ Title: msg });
 
     // .then(() =>
     //   this.goto('picture')
     // );
+
   },
 
   start: function start() {
@@ -304,56 +309,71 @@ exports['default'] = _backbone2['default'].Router.extend({
     return this;
   }
 
-  // createPictures(data) {
-  //   this.showSpinner();
-  //   let newPicture = this.collection.add(data);
-  //   newPicture.save().then(() => {
-  //     this.navigate('pictures', {trigger: true});
-  //   })
-  // }
-
 });
 module.exports = exports['default'];
 
 },{"./resources":4,"./views/add":8,"./views/detail":9,"./views/edit":10,"./views/picture":11,"backbone":12,"react":171,"react-dom":15}],8:[function(require,module,exports){
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-exports['default'] = _react2['default'].createClass({
-  displayName: 'add',
+exports["default"] = _react2["default"].createClass({
+  displayName: "add",
 
   cancelClickHandler: function cancelClickHandler() {
     this.props.onCancelClick();
   },
 
+  submitHandler: function submitHandler(data) {
+    this.props.onAddClick(data);
+  },
+
+  updateMessage: function updateMessage(event) {
+    var newMessage = event.target.value;
+
+    this.setState({
+      Title: newMessage
+    });
+  },
+
   render: function render() {
-    return _react2['default'].createElement(
-      'div',
+    return _react2["default"].createElement(
+      "div",
       null,
-      _react2['default'].createElement(
-        'h2',
+      _react2["default"].createElement(
+        "h2",
         null,
-        'Add'
+        "Add"
       ),
-      _react2['default'].createElement(
-        'button',
+      _react2["default"].createElement(
+        "form",
+        { onSubmit: this.submitHandler },
+        _react2["default"].createElement("input", { className: "addTitle", placeholder: "Title", type: "text" }),
+        _react2["default"].createElement("input", { className: "addUrl", placeholder: "Url", type: "text" })
+      ),
+      _react2["default"].createElement(
+        "button",
+        { onClick: this.submitHandler },
+        "Submit"
+      ),
+      _react2["default"].createElement(
+        "button",
         { onClick: this.cancelClickHandler },
-        'Back'
+        "Cancel"
       )
     );
   }
 
 });
-module.exports = exports['default'];
+module.exports = exports["default"];
 
 },{"react":171}],9:[function(require,module,exports){
 "use strict";
@@ -426,7 +446,6 @@ exports["default"] = _react2["default"].createClass({
   displayName: "edit",
 
   getInitialState: function getInitialState() {
-    console.log(this.props.record.Title);
     return {
       Title: this.props.record.Title
     };

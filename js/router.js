@@ -76,9 +76,23 @@ export default Backbone.Router.extend({
   },
 
   showAddPictures() {
+    
+
     this.render(
       <AddComponent
         onCancelClick={() => this.goto('picture')}
+        onAddClick={() => {
+          let newTitle = document.querySelector('.addTitle').value;
+          let newPictureUrl = document.querySelector('.addUrl').value;
+          let newAdd = new PictureModel ({
+            Title: newTitle,
+            Url: newPictureUrl
+          });
+
+
+          newAdd.save();
+          this.goto('picture');}
+      }
       />
     );
   },
@@ -104,12 +118,13 @@ export default Backbone.Router.extend({
         onSubmit={(msg) => this.saveForm(msg)}
       />
     );
+      
   },
 
   saveForm(msg) {
-    let update = (() => this.collection.toJSON());
-    console.log(update);
-    update.save({Title: msg});
+    
+
+
 
     // .then(() => 
     //   this.goto('picture')
@@ -121,14 +136,6 @@ export default Backbone.Router.extend({
     Backbone.history.start();
     return this;
   }
-
-  // createPictures(data) {
-  //   this.showSpinner();
-  //   let newPicture = this.collection.add(data);
-  //   newPicture.save().then(() => {
-  //     this.navigate('pictures', {trigger: true});
-  //   })
-  // }
 
 
 });

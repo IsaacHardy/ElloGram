@@ -2,7 +2,6 @@ import React from 'react';
 
 export default React.createClass({
   getInitialState() {
-    console.log(this.props.record.Title);
     return {
       Title: this.props.record.Title   
     };
