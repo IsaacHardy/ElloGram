@@ -17,7 +17,7 @@ export default React.createClass({
 
   updateTitle(event) {
     let newTitle = event.currentTarget.value;
-    console.log(newTitle);
+    
     this.setState({
       Title: newTitle
     });
@@ -25,7 +25,7 @@ export default React.createClass({
 
   updateUrl(event) {
     let newUrl = event.currentTarget.value;
-    console.log(newUrl);
+
     this.setState({
       Url: newUrl
     });
@@ -33,7 +33,6 @@ export default React.createClass({
 
   updateAbout(event) {
     let newAbout = event.currentTarget.value;
-    console.log(newAbout);
 
     this.setState({
       About: newAbout

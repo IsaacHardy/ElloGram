@@ -80,16 +80,12 @@ export default Backbone.Router.extend({
     this.render(
       <AddComponent
         onCancelClick={() => this.goto('picture')}
-        onAddClick={() => {
-          let newTitle = document.querySelector('.addTitle').value;
-          let newPictureUrl = document.querySelector('.addUrl').value;
-          let newAbout = document.querySelector('.addAbout').value;
+        onAddClick={(title, url, about) => {
           let newAdd = new PictureModel ({
-            Title: newTitle,
-            Url: newPictureUrl,
-            About: newAbout
+            Title: title,
+            Url: url,
+            About: about
           });
-
 
           newAdd.save().then(() => {
             this.goto('picture');
@@ -113,9 +109,8 @@ export default Backbone.Router.extend({
   },
 
   showEditPictures(id) {
-    console.log(id);
     let pic = this.collection.get(id);
-    console.log(pic);
+
     this.render(
       <EditComponent
         record={pic.toJSON()}
@@ -134,7 +129,6 @@ export default Backbone.Router.extend({
     }).then(() => {
       this.goto('picture');
     });
-    console.log(this.collection);
   },
 
   start() {

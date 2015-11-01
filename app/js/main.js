@@ -256,14 +256,11 @@ exports['default'] = _backbone2['default'].Router.extend({
       onCancelClick: function () {
         return _this3.goto('picture');
       },
-      onAddClick: function () {
-        var newTitle = document.querySelector('.addTitle').value;
-        var newPictureUrl = document.querySelector('.addUrl').value;
-        var newAbout = document.querySelector('.addAbout').value;
+      onAddClick: function (title, url, about) {
         var newAdd = new _resources.PictureModel({
-          Title: newTitle,
-          Url: newPictureUrl,
-          About: newAbout
+          Title: title,
+          Url: url,
+          About: about
         });
 
         newAdd.save().then(function () {
@@ -287,9 +284,8 @@ exports['default'] = _backbone2['default'].Router.extend({
   showEditPictures: function showEditPictures(id) {
     var _this4 = this;
 
-    console.log(id);
     var pic = this.collection.get(id);
-    console.log(pic);
+
     this.render(_react2['default'].createElement(_viewsEdit2['default'], {
       record: pic.toJSON(),
       onCancelClick: function () {
@@ -311,7 +307,6 @@ exports['default'] = _backbone2['default'].Router.extend({
     }).then(function () {
       _this5.goto('picture');
     });
-    console.log(this.collection);
   },
 
   start: function start() {
@@ -342,15 +337,32 @@ exports["default"] = _react2["default"].createClass({
     this.props.onCancelClick();
   },
 
-  submitHandler: function submitHandler(data) {
-    this.props.onAddClick(data);
+  submitHandler: function submitHandler(event) {
+    event.preventDefault();
+    this.props.onAddClick(this.state.Title, this.state.Url, this.state.About);
   },
 
-  updateMessage: function updateMessage(event) {
-    var newMessage = event.target.value;
+  updateTitle: function updateTitle(event) {
+    var newTitle = event.currentTarget.value;
 
     this.setState({
-      Title: newMessage
+      Title: newTitle
+    });
+  },
+
+  updateUrl: function updateUrl(event) {
+    var newUrl = event.currentTarget.value;
+
+    this.setState({
+      Url: newUrl
+    });
+  },
+
+  updateAbout: function updateAbout(event) {
+    var newAbout = event.currentTarget.value;
+
+    this.setState({
+      About: newAbout
     });
   },
 
@@ -366,9 +378,9 @@ exports["default"] = _react2["default"].createClass({
       _react2["default"].createElement(
         "form",
         { onSubmit: this.submitHandler },
-        _react2["default"].createElement("input", { className: "addTitle", placeholder: "Title", type: "text" }),
-        _react2["default"].createElement("input", { className: "addUrl", placeholder: "Url", type: "text" }),
-        _react2["default"].createElement("input", { className: "addAbout", placeholder: "Tell us about this picture!", type: "text" })
+        _react2["default"].createElement("input", { onChange: this.updateTitle, className: "addTitle", placeholder: "Title", type: "text" }),
+        _react2["default"].createElement("input", { onChange: this.updateUrl, className: "addUrl", placeholder: "Url", type: "text" }),
+        _react2["default"].createElement("input", { onChange: this.updateAbout, className: "addAbout", placeholder: "Tell us about this picture!", type: "text" })
       ),
       _react2["default"].createElement(
         "button",
@@ -471,7 +483,7 @@ exports["default"] = _react2["default"].createClass({
 
   updateTitle: function updateTitle(event) {
     var newTitle = event.currentTarget.value;
-    console.log(newTitle);
+
     this.setState({
       Title: newTitle
     });
@@ -479,7 +491,7 @@ exports["default"] = _react2["default"].createClass({
 
   updateUrl: function updateUrl(event) {
     var newUrl = event.currentTarget.value;
-    console.log(newUrl);
+
     this.setState({
       Url: newUrl
     });
@@ -487,7 +499,6 @@ exports["default"] = _react2["default"].createClass({
 
   updateAbout: function updateAbout(event) {
     var newAbout = event.currentTarget.value;
-    console.log(newAbout);
 
     this.setState({
       About: newAbout
