@@ -187,6 +187,7 @@ exports['default'] = _backbone2['default'].Router.extend({
   initialize: function initialize(appElement) {
     this.el = appElement;
     this.collection = new _resources.PictureCollection();
+    this.model = new _resources.PictureModel();
   },
 
   goto: function goto(route) {
@@ -258,13 +259,16 @@ exports['default'] = _backbone2['default'].Router.extend({
       onAddClick: function () {
         var newTitle = document.querySelector('.addTitle').value;
         var newPictureUrl = document.querySelector('.addUrl').value;
+        var newAbout = document.querySelector('.addAbout').value;
         var newAdd = new _resources.PictureModel({
           Title: newTitle,
-          Url: newPictureUrl
+          Url: newPictureUrl,
+          About: newAbout
         });
 
-        newAdd.save();
-        _this3.goto('picture');
+        newAdd.save().then(function () {
+          _this3.goto('picture');
+        });
       }
     }));
   },
@@ -283,25 +287,31 @@ exports['default'] = _backbone2['default'].Router.extend({
   showEditPictures: function showEditPictures(id) {
     var _this4 = this;
 
+    console.log(id);
+    var pic = this.collection.get(id);
+    console.log(pic);
     this.render(_react2['default'].createElement(_viewsEdit2['default'], {
-      record: function () {
-        return _this4.collection.toJSON();
-      },
+      record: pic.toJSON(),
       onCancelClick: function () {
         return _this4.goto('detail/' + id);
       },
-      onSubmit: function (msg) {
-        return _this4.saveForm(msg);
+      onSubmit: function (msg, url, about) {
+        return _this4.saveForm(msg, url, about, id);
       }
     }));
   },
 
-  saveForm: function saveForm(msg) {
+  saveForm: function saveForm(msg, url, about, id) {
+    var _this5 = this;
 
-    // .then(() =>
-    //   this.goto('picture')
-    // );
-
+    this.collection.get(id).save({
+      Title: msg,
+      Url: url,
+      About: about
+    }).then(function () {
+      _this5.goto('picture');
+    });
+    console.log(this.collection);
   },
 
   start: function start() {
@@ -357,7 +367,8 @@ exports["default"] = _react2["default"].createClass({
         "form",
         { onSubmit: this.submitHandler },
         _react2["default"].createElement("input", { className: "addTitle", placeholder: "Title", type: "text" }),
-        _react2["default"].createElement("input", { className: "addUrl", placeholder: "Url", type: "text" })
+        _react2["default"].createElement("input", { className: "addUrl", placeholder: "Url", type: "text" }),
+        _react2["default"].createElement("input", { className: "addAbout", placeholder: "Tell us about this picture!", type: "text" })
       ),
       _react2["default"].createElement(
         "button",
@@ -447,20 +458,39 @@ exports["default"] = _react2["default"].createClass({
 
   getInitialState: function getInitialState() {
     return {
-      Title: this.props.record.Title
+      Title: this.props.record.Title,
+      Url: this.props.record.Url,
+      About: this.props.record.About
     };
   },
 
   submitHandler: function submitHandler(event) {
     event.preventDefault();
-    this.props.onSubmit(this.state.Title);
+    this.props.onSubmit(this.state.Title, this.state.Url, this.state.About);
   },
 
-  updateMessage: function updateMessage(event) {
-    var newMessage = event.target.value;
+  updateTitle: function updateTitle(event) {
+    var newTitle = event.currentTarget.value;
+    console.log(newTitle);
+    this.setState({
+      Title: newTitle
+    });
+  },
+
+  updateUrl: function updateUrl(event) {
+    var newUrl = event.currentTarget.value;
+    console.log(newUrl);
+    this.setState({
+      Url: newUrl
+    });
+  },
+
+  updateAbout: function updateAbout(event) {
+    var newAbout = event.currentTarget.value;
+    console.log(newAbout);
 
     this.setState({
-      Title: newMessage
+      About: newAbout
     });
   },
 
@@ -480,7 +510,9 @@ exports["default"] = _react2["default"].createClass({
       _react2["default"].createElement(
         "form",
         { onSubmit: this.submitHandler },
-        _react2["default"].createElement("input", { onChange: this.updateMessage, type: "text", value: this.state.Title })
+        _react2["default"].createElement("input", { onChange: this.updateTitle, type: "text", value: this.state.Title, placeholder: "Title" }),
+        _react2["default"].createElement("input", { onChange: this.updateUrl, type: "text", value: this.state.Url, placeholder: "Url" }),
+        _react2["default"].createElement("input", { onChange: this.updateAbout, type: "text", value: this.state.About, placeholder: "About" })
       ),
       _react2["default"].createElement(
         "button",

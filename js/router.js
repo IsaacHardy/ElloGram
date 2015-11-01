@@ -22,6 +22,7 @@ export default Backbone.Router.extend({
   initialize(appElement) {
     this.el = appElement;
     this.collection = new PictureCollection();
+    this.model = new PictureModel();
 
   },
 
@@ -75,24 +76,25 @@ export default Backbone.Router.extend({
 
   },
 
-  showAddPictures() {
-    
-
+  showAddPictures() {  
     this.render(
       <AddComponent
         onCancelClick={() => this.goto('picture')}
         onAddClick={() => {
           let newTitle = document.querySelector('.addTitle').value;
           let newPictureUrl = document.querySelector('.addUrl').value;
+          let newAbout = document.querySelector('.addAbout').value;
           let newAdd = new PictureModel ({
             Title: newTitle,
-            Url: newPictureUrl
+            Url: newPictureUrl,
+            About: newAbout
           });
 
 
-          newAdd.save();
-          this.goto('picture');}
-      }
+          newAdd.save().then(() => {
+            this.goto('picture');
+          });
+        }}
       />
     );
   },
@@ -111,25 +113,28 @@ export default Backbone.Router.extend({
   },
 
   showEditPictures(id) {
+    console.log(id);
+    let pic = this.collection.get(id);
+    console.log(pic);
     this.render(
       <EditComponent
-        record={() => this.collection.toJSON()}
+        record={pic.toJSON()}
         onCancelClick={() => this.goto('detail/' + id)}
-        onSubmit={(msg) => this.saveForm(msg)}
+        onSubmit={(msg, url, about) => this.saveForm(msg, url, about, id)}
       />
     );
       
   },
 
-  saveForm(msg) {
-    
-
-
-
-    // .then(() => 
-    //   this.goto('picture')
-    // );
-    
+  saveForm(msg, url, about, id) {
+    this.collection.get(id).save({
+      Title: msg,
+      Url: url,
+      About: about
+    }).then(() => {
+      this.goto('picture');
+    });
+    console.log(this.collection);
   },
 
   start() {

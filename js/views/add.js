@@ -25,6 +25,7 @@ export default React.createClass({
         <form onSubmit={this.submitHandler}>
           <input className="addTitle" placeholder="Title" type="text"/>
           <input className="addUrl" placeholder="Url" type="text"/>
+          <input className="addAbout" placeholder="Tell us about this picture!" type="text"/>
         </form>
         <button onClick={this.submitHandler}>Submit</button>
         <button onClick={this.cancelClickHandler}>Cancel</button>
