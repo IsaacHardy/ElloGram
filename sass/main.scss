@@ -2,6 +2,73 @@
 @import "neat";
 @import "font-awesome";
 
+body {
+  background-color: #F5F5F5;
+}
+
+.main-header {
+  height: 45px;
+  border-bottom: 1px solid black;
+  background: linear-gradient(#507FA6, #32628C);
+
+}
+
+.main-title {
+  float: left;
+  font-size: 24px;
+  margin-top: 2px;
+  background: -webkit-linear-gradient(#F5F7F9,#AABFD0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Indie Flower', cursive;
+  margin-left: 200px;
+}
+.main-login {
+  float: right;
+  border-left: 1px solid #386387;
+  border-right: 1px solid #386387;
+  color: white;
+  padding: 12px;
+  font-size: 13px;
+
+  .fa-user {
+    background: -webkit-linear-gradient(#F5F7F9,#AABFD0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-right: 5px;  
+    font-size: 20px;
+  }
+
+  &:hover {
+    background: #507FA6;
+
+  }
+}
+.main-settings {
+  float: right;
+  border-right: 1px solid #386387;
+  color: white;
+  margin-right: 200px;
+  padding: 12px;
+  font-size: 13px;
+
+  .fa-cog {
+    background: -webkit-linear-gradient(#F5F7F9,#AABFD0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-right: 5px;
+    font-size: 20px;
+  }
+
+  &:hover {
+    background: #507FA6;
+
+  }
+}
+
+
+
+
 .outer {
   @include outer-container;
 
@@ -34,15 +101,20 @@
 
 }
 
-.main-header {
+.picture-header {
   width: 100%;
+  text-align: center;
+  margin-left: 63px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  font-size: 20px;
 
-  .main-button {
+  .picture-button {
     float: right;
     display: inline-block;
 
 
-    .main-add {
+    .picture-add {
       width: 125px;
       margin: 20px 0;
     }

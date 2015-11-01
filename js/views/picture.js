@@ -22,10 +22,10 @@ export default React.createClass({
   render() {
     return (
       <div className="outer">
-        <div className="main-header">
+        <div className="picture-header">
           <h2>Pictures</h2>
-          <div className="main-button">
-            <button className="main-add" onClick={this.addClickHandler}>Add Picture</button>
+          <div className="picture-button">
+            <button className="picture-add" onClick={this.addClickHandler}>Add Picture</button>
           </div>          
         </div>
 

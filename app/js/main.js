@@ -586,7 +586,7 @@ exports['default'] = _react2['default'].createClass({
       { className: 'outer' },
       _react2['default'].createElement(
         'div',
-        { className: 'main-header' },
+        { className: 'picture-header' },
         _react2['default'].createElement(
           'h2',
           null,
@@ -594,10 +594,10 @@ exports['default'] = _react2['default'].createClass({
         ),
         _react2['default'].createElement(
           'div',
-          { className: 'main-button' },
+          { className: 'picture-button' },
           _react2['default'].createElement(
             'button',
-            { className: 'main-add', onClick: this.addClickHandler },
+            { className: 'picture-add', onClick: this.addClickHandler },
             'Add Picture'
           )
         )
