@@ -21,12 +21,19 @@ export default React.createClass({
 
   render() {
     return (
-      <div>
-        <h2>Pictures</h2> 
-        <div>
-          {this.props.pictures().map(this.processPictures)}
-          <button onClick={this.addClickHandler}>Add</button>
+      <div className="outer">
+        <div className="main-header">
+          <h2>Pictures</h2>
+          <div className="main-button">
+            <button className="main-add" onClick={this.addClickHandler}>Add Picture</button>
+          </div>          
         </div>
+
+        <div className="primary">
+          {this.props.pictures().map(this.processPictures)}          
+        </div>
+
+        
       </div>
     );
   }

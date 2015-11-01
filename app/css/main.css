@@ -2024,7 +2024,57 @@ html {
 .fa-fonticons:before {
   content: ""; }
 
-body {
-  background: #e2ebf3; }
+.outer {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto; }
+  .outer::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .outer .primary {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 100%;
+    margin-right: 0; }
+    .outer .primary:last-child {
+      margin-right: 0; }
+    .outer .primary .pic-container {
+      float: left;
+      display: block;
+      margin-right: 2.35765%;
+      width: 23.23176%; }
+      .outer .primary .pic-container:last-child {
+        margin-right: 0; }
+      .outer .primary .pic-container:nth-child(4n) {
+        margin-right: 0; }
+      .outer .primary .pic-container:nth-child(4n+1) {
+        clear: left; }
+
+.pic-container {
+  border: 1px solid black;
+  overflow: hidden;
+  height: 200px;
+  cursor: pointer;
+  margin-bottom: 2.35765%;
+  border-radius: 15%; }
+
+.main-pictures {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+.main-header {
+  width: 100%; }
+  .main-header .main-button {
+    float: right;
+    display: inline-block; }
+    .main-header .main-button .main-add {
+      width: 125px;
+      margin: 20px 0; }
+  .main-header h2 {
+    display: inline-block;
+    margin: 20px 0; }
 
 /*# sourceMappingURL=main.css.map */

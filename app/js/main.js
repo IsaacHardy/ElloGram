@@ -583,21 +583,29 @@ exports['default'] = _react2['default'].createClass({
   render: function render() {
     return _react2['default'].createElement(
       'div',
-      null,
+      { className: 'outer' },
       _react2['default'].createElement(
-        'h2',
-        null,
-        'Pictures'
+        'div',
+        { className: 'main-header' },
+        _react2['default'].createElement(
+          'h2',
+          null,
+          'Pictures'
+        ),
+        _react2['default'].createElement(
+          'div',
+          { className: 'main-button' },
+          _react2['default'].createElement(
+            'button',
+            { className: 'main-add', onClick: this.addClickHandler },
+            'Add Picture'
+          )
+        )
       ),
       _react2['default'].createElement(
         'div',
-        null,
-        this.props.pictures().map(this.processPictures),
-        _react2['default'].createElement(
-          'button',
-          { onClick: this.addClickHandler },
-          'Add'
-        )
+        { className: 'primary' },
+        this.props.pictures().map(this.processPictures)
       )
     );
   }
