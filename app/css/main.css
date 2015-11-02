@@ -2111,7 +2111,8 @@ body {
     display: block;
     margin-right: 2.35765%;
     width: 100%;
-    margin-right: 0; }
+    margin-right: 0;
+    margin-bottom: 70px; }
     .outer .primary:last-child {
       margin-right: 0; }
     .outer .primary .pic-container {
@@ -2239,7 +2240,7 @@ body {
         background: -webkit-linear-gradient(#507FA6, #32628C);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent; }
-      .add-outer .add-form .add-label-about input {
+      .add-outer .add-form .add-label-about textarea {
         width: 400px;
         height: 100px;
         display: block; }
@@ -2295,7 +2296,7 @@ body {
         background: -webkit-linear-gradient(#507FA6, #32628C);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent; }
-      .edit-outer .edit-form .edit-label-about input {
+      .edit-outer .edit-form .edit-label-about textarea {
         width: 400px;
         height: 100px;
         display: block; }
@@ -2332,7 +2333,8 @@ body {
     .detail-outer .detail-img img {
       width: 100%;
       border-radius: 25px;
-      border: 10px dotted #507FA6; }
+      border: 10px dotted #507FA6;
+      max-height: 550px; }
   .detail-outer .detail-about {
     float: left;
     display: block;
@@ -2549,5 +2551,13 @@ body {
     margin-top: -13px;
     padding-bottom: 13px;
     outline: none; }
+
+.spinner {
+  margin-left: 43%;
+  margin-top: 200px; }
+
+.fa-cog {
+  font-size: 200px;
+  color: #507FA6; }
 
 /*# sourceMappingURL=main.css.map */

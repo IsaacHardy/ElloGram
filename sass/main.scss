@@ -102,6 +102,7 @@ body {
   .primary {
     @include span-columns(12);
     @include omega;
+    margin-bottom: 70px;
 
     .pic-container {
       @include span-columns(3 of 12);
@@ -256,7 +257,7 @@ body {
         -webkit-text-fill-color: transparent;  
       }
       
-      input {
+      textarea {
         width: 400px;
         height: 100px;
         display: block;
@@ -333,7 +334,7 @@ body {
         -webkit-text-fill-color: transparent;  
       }
       
-      input {
+      textarea {
         width: 400px;
         height: 100px;
         display: block;
@@ -373,6 +374,7 @@ body {
       width: 100%;
       border-radius: 25px;
       border: 10px dotted #507FA6;
+      max-height: 550px;
     }
   }
 
@@ -643,4 +645,14 @@ body {
     outline: none;
 
   }
+}
+
+.spinner {
+  margin-left: 43%;
+  margin-top: 200px;
+}
+
+.fa-cog {
+  font-size: 200px;
+  color: #507FA6;
 }

@@ -7,6 +7,7 @@ import PictureComponent from './views/picture';
 import DetailsComponent from './views/detail';
 import AddComponent from './views/add';
 import EditComponent from './views/edit';
+import SpinnerComponent from './views/spinner';
 
 export default Backbone.Router.extend({
   routes: {
@@ -37,6 +38,7 @@ export default Backbone.Router.extend({
   },
 
   showPictures() {
+    this.showSpinner();
     this.collection.fetch().then(() => {
       this.render(
         <PictureComponent          
@@ -62,6 +64,7 @@ export default Backbone.Router.extend({
       );
       
     } else {
+      this.showSpinner();
       image = this.collection.add({objectId: id});
       image.fetch().then(() => {
         this.render(
@@ -87,6 +90,7 @@ export default Backbone.Router.extend({
             About: about
           });
 
+          this.showSpinner();
           newAdd.save().then(() => {
             this.goto('picture');
           });
@@ -123,6 +127,7 @@ export default Backbone.Router.extend({
   },
 
   saveForm(msg, url, about, id) {
+    this.showSpinner();
     this.collection.get(id).save({
       Title: msg,
       Url: url,

@@ -4,7 +4,7 @@ export default React.createClass({
 
   render() {
     return (
-      <div>
+      <div className="spinner">
         <i className="fa fa-cog fa-spin"/>
       </div>
     );

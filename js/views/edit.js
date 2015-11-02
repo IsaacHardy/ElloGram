@@ -54,7 +54,7 @@ export default React.createClass({
           <form onSubmit={this.submitHandler}>
             <label className="edit-label-title">Title: <input onChange={this.updateTitle} type="text" value={this.state.Title} placeholder="Name your picture!"/></label>
             <label className="edit-label-url">Url: <input onChange={this.updateUrl} type="url" value={this.state.Url} placeholder="example.com/picture.png"/></label>
-            <label className="edit-label-about">About: <input onChange={this.updateAbout} type="text" value={this.state.About} placeholder="Tell us about this picture!"/></label>
+            <label className="edit-label-about">About: <textarea onChange={this.updateAbout} type="text" value={this.state.About} placeholder="Tell us about this picture!"/></label>
           </form>
         </div>
 
