@@ -2127,12 +2127,15 @@ body {
         clear: left; }
 
 .pic-container {
-  border: 1px solid black;
   overflow: hidden;
   height: 200px;
   cursor: pointer;
   margin-bottom: 2.35765%;
-  border-radius: 15%; }
+  border-radius: 15%;
+  opacity: .65; }
+  .pic-container:hover {
+    border: 3px dotted #507FA6;
+    opacity: 1; }
 
 .main-pictures {
   width: 100%;
@@ -2328,7 +2331,8 @@ body {
       margin-right: 0; }
     .detail-outer .detail-img img {
       width: 100%;
-      border-radius: 25px; }
+      border-radius: 25px;
+      border: 10px dotted #507FA6; }
   .detail-outer .detail-about {
     float: left;
     display: block;

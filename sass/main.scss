@@ -112,12 +112,18 @@ body {
 }
 
 .pic-container {
-  border: 1px solid black;
+  
   overflow: hidden;
   height: 200px;
   cursor: pointer;
   margin-bottom: 2.35765%;
   border-radius: 15%;
+  opacity: .65;
+
+  &:hover {
+    border: 3px dotted #507FA6;
+    opacity: 1;
+  }
   
 }
 
@@ -366,6 +372,7 @@ body {
     img {
       width: 100%;
       border-radius: 25px;
+      border: 10px dotted #507FA6;
     }
   }
 
