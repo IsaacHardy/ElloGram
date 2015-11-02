@@ -116,6 +116,7 @@ export default Backbone.Router.extend({
         record={pic.toJSON()}
         onCancelClick={() => this.goto('detail/' + id)}
         onSubmit={(msg, url, about) => this.saveForm(msg, url, about, id)}
+
       />
     );
       

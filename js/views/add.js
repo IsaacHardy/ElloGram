@@ -37,15 +37,27 @@ export default React.createClass({
 
   render() {
     return (
-      <div>
-        <h2>Add</h2>
-        <form onSubmit={this.submitHandler}>
-          <input onChange={this.updateTitle} className="addTitle" placeholder="Title" type="text"/>
-          <input onChange={this.updateUrl} className="addUrl" placeholder="Url" type="text"/>
-          <input onChange={this.updateAbout} className="addAbout" placeholder="Tell us about this picture!" type="text"/>
-        </form>
-        <button onClick={this.submitHandler}>Submit</button>
-        <button onClick={this.cancelClickHandler}>Cancel</button>
+      <div className="add-outer">
+        <div className="add-header">
+          <h2>Add</h2>
+        </div>
+
+        <div className="add-form">
+          <form onSubmit={this.submitHandler}>
+            <label className="add-label-title">Title: <input onChange={this.updateTitle} className="add-input-title" placeholder="Name your picture!" type="text"/></label>
+            <label className="add-label-url">Url: <input onChange={this.updateUrl} className="add-input-url" placeholder="example.com/picture.png" type="url"/></label>
+            <label className="add-label-about">About: <input onChange={this.updateAbout} className="add-input-about" placeholder="Tell us about this picture!" type="text"/></label>
+          </form>
+        </div>
+
+        <div className="add-submit">
+          <i className="fa fa-check"></i>
+            <button className="add-submit-btn" onClick={this.submitHandler}>Submit</button>
+        </div>
+        <div className="add-cancel">
+          <i className="fa fa-ban"></i>
+          <button className="add-cancel-btn" onClick={this.cancelClickHandler}>Cancel</button>
+        </div>
       </div>
     );
   }

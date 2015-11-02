@@ -23,8 +23,9 @@ export default React.createClass({
     return (
       <div className="outer">
         <div className="picture-header">
-          <h2>Pictures</h2>
+          <h2>Ellowyn Noel Hardy</h2>
           <div className="picture-button">
+            <i className="fa fa-plus-circle"></i>
             <button className="picture-add" onClick={this.addClickHandler}>Add Picture</button>
           </div>          
         </div>

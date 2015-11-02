@@ -45,15 +45,27 @@ export default React.createClass({
 
   render() {
     return (
-      <div>
-        <h2>Edit</h2>
-        <form onSubmit={this.submitHandler}>
-          <input onChange={this.updateTitle} type="text" value={this.state.Title} placeholder="Title"/>
-          <input onChange={this.updateUrl} type="text" value={this.state.Url} placeholder="Url"/>
-          <input onChange={this.updateAbout} type="text" value={this.state.About} placeholder="About"/>
-        </form>
-        <button onClick={this.submitHandler}>Submit</button>
-        <button onClick={this.cancelClickHandler}>Cancel</button>
+      <div className="edit-outer">
+        <div className="edit-header">
+          <h2>Edit</h2>
+        </div>
+
+        <div className="edit-form">
+          <form onSubmit={this.submitHandler}>
+            <label className="edit-label-title">Title: <input onChange={this.updateTitle} type="text" value={this.state.Title} placeholder="Name your picture!"/></label>
+            <label className="edit-label-url">Url: <input onChange={this.updateUrl} type="url" value={this.state.Url} placeholder="example.com/picture.png"/></label>
+            <label className="edit-label-about">About: <input onChange={this.updateAbout} type="text" value={this.state.About} placeholder="Tell us about this picture!"/></label>
+          </form>
+        </div>
+
+        <div className="edit-submit">
+          <i className="fa fa-check"></i>
+          <button className="edit-submit-btn" onClick={this.submitHandler}>Submit</button>
+        </div>
+        <div className="edit-cancel">
+          <i className="fa fa-ban"></i>
+          <button className="edit-cancel-btn" onClick={this.cancelClickHandler}>Cancel</button>
+        </div>
       </div>
     );
   }

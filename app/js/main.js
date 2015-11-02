@@ -294,6 +294,7 @@ exports['default'] = _backbone2['default'].Router.extend({
       onSubmit: function (msg, url, about) {
         return _this4.saveForm(msg, url, about, id);
       }
+
     }));
   },
 
@@ -369,28 +370,61 @@ exports["default"] = _react2["default"].createClass({
   render: function render() {
     return _react2["default"].createElement(
       "div",
-      null,
+      { className: "add-outer" },
       _react2["default"].createElement(
-        "h2",
-        null,
-        "Add"
+        "div",
+        { className: "add-header" },
+        _react2["default"].createElement(
+          "h2",
+          null,
+          "Add"
+        )
       ),
       _react2["default"].createElement(
-        "form",
-        { onSubmit: this.submitHandler },
-        _react2["default"].createElement("input", { onChange: this.updateTitle, className: "addTitle", placeholder: "Title", type: "text" }),
-        _react2["default"].createElement("input", { onChange: this.updateUrl, className: "addUrl", placeholder: "Url", type: "text" }),
-        _react2["default"].createElement("input", { onChange: this.updateAbout, className: "addAbout", placeholder: "Tell us about this picture!", type: "text" })
+        "div",
+        { className: "add-form" },
+        _react2["default"].createElement(
+          "form",
+          { onSubmit: this.submitHandler },
+          _react2["default"].createElement(
+            "label",
+            { className: "add-label-title" },
+            "Title: ",
+            _react2["default"].createElement("input", { onChange: this.updateTitle, className: "add-input-title", placeholder: "Name your picture!", type: "text" })
+          ),
+          _react2["default"].createElement(
+            "label",
+            { className: "add-label-url" },
+            "Url: ",
+            _react2["default"].createElement("input", { onChange: this.updateUrl, className: "add-input-url", placeholder: "example.com/picture.png", type: "url" })
+          ),
+          _react2["default"].createElement(
+            "label",
+            { className: "add-label-about" },
+            "About: ",
+            _react2["default"].createElement("input", { onChange: this.updateAbout, className: "add-input-about", placeholder: "Tell us about this picture!", type: "text" })
+          )
+        )
       ),
       _react2["default"].createElement(
-        "button",
-        { onClick: this.submitHandler },
-        "Submit"
+        "div",
+        { className: "add-submit" },
+        _react2["default"].createElement("i", { className: "fa fa-check" }),
+        _react2["default"].createElement(
+          "button",
+          { className: "add-submit-btn", onClick: this.submitHandler },
+          "Submit"
+        )
       ),
       _react2["default"].createElement(
-        "button",
-        { onClick: this.cancelClickHandler },
-        "Cancel"
+        "div",
+        { className: "add-cancel" },
+        _react2["default"].createElement("i", { className: "fa fa-ban" }),
+        _react2["default"].createElement(
+          "button",
+          { className: "add-cancel-btn", onClick: this.cancelClickHandler },
+          "Cancel"
+        )
       )
     );
   }
@@ -427,24 +461,56 @@ exports["default"] = _react2["default"].createClass({
 
     return _react2["default"].createElement(
       "div",
-      null,
+      { className: "detail-outer" },
       _react2["default"].createElement(
-        "h2",
-        null,
-        "Details"
-      ),
-      _react2["default"].createElement("img", { src: this.props.details.Url }),
-      _react2["default"].createElement(
-        "button",
-        { key: this.props.details.objectId, className: "edit-btn", onClick: function () {
-            return _this.editClickHandler(_this.props.details.objectId);
-          } },
-        "Edit"
+        "div",
+        { className: "detail-header" },
+        _react2["default"].createElement(
+          "h2",
+          null,
+          this.props.details.Title
+        )
       ),
       _react2["default"].createElement(
-        "button",
-        { onClick: this.backClickHandler },
-        "Back"
+        "div",
+        { className: "detail-img" },
+        _react2["default"].createElement("img", { src: this.props.details.Url })
+      ),
+      _react2["default"].createElement(
+        "div",
+        { className: "detail-about" },
+        _react2["default"].createElement(
+          "h2",
+          null,
+          "About This Picture"
+        ),
+        _react2["default"].createElement(
+          "p",
+          null,
+          this.props.details.About
+        )
+      ),
+      _react2["default"].createElement(
+        "div",
+        { className: "detail-edit" },
+        _react2["default"].createElement("i", { className: "fa fa-pencil" }),
+        _react2["default"].createElement(
+          "button",
+          { className: "detail-edit-btn", key: this.props.details.objectId, onClick: function () {
+              return _this.editClickHandler(_this.props.details.objectId);
+            } },
+          "Edit Picture"
+        )
+      ),
+      _react2["default"].createElement(
+        "div",
+        { className: "detail-back" },
+        _react2["default"].createElement("i", { className: "fa fa-arrow-left" }),
+        _react2["default"].createElement(
+          "button",
+          { className: "detail-back-btn", onClick: this.backClickHandler },
+          "Go Back"
+        )
       )
     );
   }
@@ -512,28 +578,61 @@ exports["default"] = _react2["default"].createClass({
   render: function render() {
     return _react2["default"].createElement(
       "div",
-      null,
+      { className: "edit-outer" },
       _react2["default"].createElement(
-        "h2",
-        null,
-        "Edit"
+        "div",
+        { className: "edit-header" },
+        _react2["default"].createElement(
+          "h2",
+          null,
+          "Edit"
+        )
       ),
       _react2["default"].createElement(
-        "form",
-        { onSubmit: this.submitHandler },
-        _react2["default"].createElement("input", { onChange: this.updateTitle, type: "text", value: this.state.Title, placeholder: "Title" }),
-        _react2["default"].createElement("input", { onChange: this.updateUrl, type: "text", value: this.state.Url, placeholder: "Url" }),
-        _react2["default"].createElement("input", { onChange: this.updateAbout, type: "text", value: this.state.About, placeholder: "About" })
+        "div",
+        { className: "edit-form" },
+        _react2["default"].createElement(
+          "form",
+          { onSubmit: this.submitHandler },
+          _react2["default"].createElement(
+            "label",
+            { className: "edit-label-title" },
+            "Title: ",
+            _react2["default"].createElement("input", { onChange: this.updateTitle, type: "text", value: this.state.Title, placeholder: "Name your picture!" })
+          ),
+          _react2["default"].createElement(
+            "label",
+            { className: "edit-label-url" },
+            "Url: ",
+            _react2["default"].createElement("input", { onChange: this.updateUrl, type: "url", value: this.state.Url, placeholder: "example.com/picture.png" })
+          ),
+          _react2["default"].createElement(
+            "label",
+            { className: "edit-label-about" },
+            "About: ",
+            _react2["default"].createElement("input", { onChange: this.updateAbout, type: "text", value: this.state.About, placeholder: "Tell us about this picture!" })
+          )
+        )
       ),
       _react2["default"].createElement(
-        "button",
-        { onClick: this.submitHandler },
-        "Submit"
+        "div",
+        { className: "edit-submit" },
+        _react2["default"].createElement("i", { className: "fa fa-check" }),
+        _react2["default"].createElement(
+          "button",
+          { className: "edit-submit-btn", onClick: this.submitHandler },
+          "Submit"
+        )
       ),
       _react2["default"].createElement(
-        "button",
-        { onClick: this.cancelClickHandler },
-        "Cancel"
+        "div",
+        { className: "edit-cancel" },
+        _react2["default"].createElement("i", { className: "fa fa-ban" }),
+        _react2["default"].createElement(
+          "button",
+          { className: "edit-cancel-btn", onClick: this.cancelClickHandler },
+          "Cancel"
+        )
       )
     );
   }
@@ -590,11 +689,12 @@ exports['default'] = _react2['default'].createClass({
         _react2['default'].createElement(
           'h2',
           null,
-          'Pictures'
+          'Ellowyn Noel Hardy'
         ),
         _react2['default'].createElement(
           'div',
           { className: 'picture-button' },
+          _react2['default'].createElement('i', { className: 'fa fa-plus-circle' }),
           _react2['default'].createElement(
             'button',
             { className: 'picture-add', onClick: this.addClickHandler },
