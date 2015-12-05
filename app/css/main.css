@@ -2151,8 +2151,7 @@ body {
   font-size: 20px;
   transition: font-size 2s, background-color 4s; }
   .picture-header:hover {
-    font-size: 40px;
-    background-color: red; }
+    font-size: 40px; }
   .picture-header .picture-button {
     border: none;
     width: 135px;
