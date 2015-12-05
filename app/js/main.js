@@ -124,15 +124,14 @@ exports['default'] = _backbone2['default'].Model.extend({
 
   urlRoot: _parse_data.APP_URL,
 
-  idAttribute: 'objectId',
-
-  templateData: function templateData() {
-    var data = this.toJSON();
-    return data;
-  }
+  idAttribute: 'objectId'
 
 });
 module.exports = exports['default'];
+// templateData() {
+//   let data = this.toJSON();
+//   return data;
+// }
 
 },{"../parse_data":3,"backbone":13}],7:[function(require,module,exports){
 'use strict';

@@ -1,6 +1,21 @@
-## Welcome to My Project
+## Ellogram
 
-> I am your Readme.md file, you should probably update me.
+This is an Instagram inspired web app, that is built with Reactjs and Backbonejs. Users are able to add, edit, and view pictures and their descriptions. 
+
+#### Tech Used
+
+* JavaScript
+* Reactjs
+* Backbonejs
+* Nodejs
+* SASS
+* CSS
+* HTML
+* Gulp
+* Mocha
+* Chai
+* JSON
+* AJAX
 
 
 ## Usage
